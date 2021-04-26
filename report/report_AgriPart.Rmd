@@ -1,11 +1,17 @@
 ---
-title: "Report_AlgriPart"
+title: "Implementation of Stochastic Gradient Hamiltonian Monte Carlo"
 date: "4/25/2021"
+author: "Qinzhe Wang, Yi Mi"
 output: pdf_document
 ---
 
+# Abstract
+The Stochastic Gradient Hamiltonian Monte Carlo (SGHMC) algorithm is proposed to address the limitations of Hamiltonian Monte Carlo (HMC) sampling methods, which is not suitable for solving the problems of computing the gradient of streaming data or large sample size. SGHMC takes the advantage of noisy gradient estimates based on the subsets of data. This project implements the algorithm from the paper Stochastic Gradient Hamiltonian Monte Carlo and optimizes the performance by using Numba and C++. The algorithm was applied on both simulated data and real data and was compared to other competing algorithms.
 
-## Algorithm
+# Background
+
+
+## Description of algorithm
 
 This part contains two parts: Hamiltonian Monte Carlo and Stochastic Gradient Hamiltonian Monte Carlo.
 
@@ -38,3 +44,26 @@ $$d \theta = M^{-1}rdt \ \ \ \ and \ \ \ \ dr = -\nabla U(\theta) dt - BM^{-1}rd
 $$
 dr = -\nabla U(\theta) dt - BM^{-1}rdt+N(0,2B(\theta)dt) \ \ \ \ (10)
 $$
+
+
+# Optimization for performance
+
+
+# Applications to simulated data sets
+
+
+# Applications to real data sets
+
+
+## Real data sets
+
+
+## Competing algorithms
+
+
+# Discussion
+
+
+# References
+
+
