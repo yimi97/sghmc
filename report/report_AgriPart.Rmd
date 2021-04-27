@@ -70,9 +70,9 @@ Four different functions for optimization are plain python using numpy, python f
 
 | Algorithm 	| Running Time 	|
 |:---------------------------:	|:----------------:	|
-| plain python (numpy) 	| 7.91 s ± 140 ms  	|
-| python with cholesky decomposition | 7.51 s ± 140 ms | 
-| numba 	| 7.38 s ± 321 ms 	|
+| plain python (numpy) 	| 7.61 s ± 140 ms  	|
+| python with cholesky decomposition | 7.48 s ± 316 ms | 
+| numba 	| 7.14 s ± 88.5 ms 	|
 | cpp | 316 ms ± 6.25 ms|
 
 We first found that using Numba did not improve the performance a lot, so we decided to use C++ to optimize the algorithm. The main reasons that Python is slower than C++ are Python is an interpreted language and supports Garbage Collection. We use the package pybind11 to wrap C++ code for Python, which provides an automatic conversion for NumPy arrays and the C++ Eigen linear algebra library. In our experiment, we re-write the gradient function and SGHMC function in C++.

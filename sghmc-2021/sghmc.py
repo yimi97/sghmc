@@ -6,10 +6,16 @@ from numba import jit, float64, int64
 import time
 
 def posi_defnite_check(A):
+    """
+    check whether the matrix is positive definite
+    """
     return np.all(np.linalg.eigvals(A) > 0)
 
 
 def batch_fun(data, size):
+    """
+    function for data batch
+    """
     n = data.shape[0]
     i = np.arange(n)
     p = data.shape[1]
@@ -29,6 +35,9 @@ def batch_fun(data, size):
 
 def sghmc(gradU, eps, C, Mmatrix, theta_initial, Cov_hat, epoch_nums, epoch_nums_drop, data, size, seed=663):
 
+    """
+    apply the SGHMC function in the paper
+    """
     ## gradU: function(theta, X, y), U gradient
 
     ## eps: learning rate
@@ -57,7 +66,7 @@ def sghmc(gradU, eps, C, Mmatrix, theta_initial, Cov_hat, epoch_nums, epoch_nums
 
     B_hat = 0.5 * eps * Cov_hat
 
-    if not posi_defnite_check(2 * (C - B_hat) * eps):
+    if not (2 * (C - B_hat) * eps):
         print("The noise term has to be positive define.")
         return
 
