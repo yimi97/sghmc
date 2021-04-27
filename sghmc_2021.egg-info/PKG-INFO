@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: sghmc-2021
+Version: 0.1
+Summary: Implementation of Stochastic Gradient Hamiltonian Monte Carlo
+Home-page: https://github.com/yimi97/sghmc
+Author: Qinzhe Wang & Yi Mi
+Author-email: sif1900@outlook.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN

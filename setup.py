@@ -1,11 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
-setup(name='sghmc',
+setup(name='sghmc-2021',
       version='0.1',
       description='Implementation of Stochastic Gradient Hamiltonian Monte Carlo',
       url='https://github.com/yimi97/sghmc',
       author='Qinzhe Wang & Yi Mi',
-      author_email='qw92@duke.edu & yi.mi@duke.edu',
+      author_email='sif1900@outlook.com',
       license='MIT',
-      packages=['sghmc'],
+      packages=['sghmc-2021'],
       zip_safe=False)
