@@ -75,6 +75,8 @@ Four different functions for optimization are plain python using numpy, python f
 | numba 	| 7.38 s ± 321 ms 	|
 | cpp | 316 ms ± 6.25 ms|
 
+We first found that using Numba did not improve the performance a lot, so we decided to use C++ to optimize the algorithm. The main reasons that Python is slower than C++ are Python is an interpreted language and supports Garbage Collection. We use the package pybind11 to wrap C++ code for Python, which provides an automatic conversion for NumPy arrays and the C++ Eigen linear algebra library. In our experiment, we re-write the gradient function and SGHMC function in C++.
+
 Except using cpp, the other three methods provide similar results regarding the mixture normal example. We can see that using Cholesky decomposition or using JIT compilation (numba) only improves the algorithm a little, from 7.91 s ± 140 ms per loop to 7.51 s ± 140 ms per loop and 7.38 s ± 321 ms per loop. One noteworthy point is that we use the `jacobian` function from the autograd package o calculate the auto-gradient. However, this function takes more time than expected. To implement SGHMC, a function to calculate the gradients of log densities are necessary. Therefore, we encourage users to write a gradient function by themselves and then use it as an argument in the sghmc function (our sghmc function allows users to use their gradient functions).
 
 # Applications to simulated data sets
@@ -94,8 +96,6 @@ This part compares the distribution among five different algorithms (listed belo
   - The Naive stochastic gradient HMC with MH
   
   - The Naive stochastic gradient HMC without MH
-  
-  
 
 
 And a comparison figure shown as below:
@@ -109,12 +109,14 @@ And a comparison figure shown as below:
 All five algorithms perform similarly to the distribution of simulated data except the naive stochastic gradient HMC without MH. Theoretically, SGHMC and HMC have the invariance of Hamiltonian function for a $\epsilon$ value close to 0. However, the naive stochastic gradient HMC without MH does not unless the MH step is added. That is the reason why the naive stochastic gradient HMC without MH is barely satisfactory in the figure. Then, the MH step will be costly, so that users may need a tradeoff between the accuracy and the cost. Our focus, the distribution of SGHMC, gives a similar result as the distribution of simulated data.
 
 
-
 # Applications to real data sets
 
-
 ## Real data sets
+In addition to the application on the simulated datasets, we also applied the SGHMC on the real datasets MNIST, which was used in the paper. MNIST is a large database of handwritten digits that is commonly used for training various image processing systems, consists of 60,000 training instances and 10,000 test instances. We utilized the author’s code to train a two-layer Bayesian neural network with 100 hidden variables using a sigmoid unit and an output layer using softmax. To select training parameters, the training data is split out 10,000 instances to form a validation set and the remaining 50,000 instances are used for training. We run the samplers for 800 iterations and discard the initial 50 samples as burn-in. Three methods are tested in this experiment, SGD with momentum, SGLD and SGHMC. Fig 3 is the test result of the methods. It is shown that, based on our experiment results, both SGHMC and SGD with momentum converge to the lower test error compared to SGLD. But in Fig 4 we can see that SGHMC has the better result than SGD with momentum. However, according to the running time, SGHMC is much faster than SGD with momentum.
 
+![]("../figures/Real_data_1.png")
+
+![]("../figures/Real_data_2.png")
 
 ## Competing algorithms
 
