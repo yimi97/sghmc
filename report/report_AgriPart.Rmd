@@ -126,3 +126,12 @@ In addition to the application on the simulated datasets, we also applied the SG
 
 # References
 Chen, Tianqi, Fox, Emily, and Guestrin, Carlos. Stochastic gradient hamiltonian monte carlo. ICML 2014. 
+
+# Appendix
+
+### URL
+[https://github.com/yimi97/sghmc](https://github.com/yimi97/sghmc)
+
+### Installation
+`pip install -i https://test.pypi.org/simple/ sghmc-2021`
+
