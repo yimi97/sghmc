@@ -63,8 +63,9 @@ In this part, we create a new mixture normal model for the optimization. With th
 
 | Algorithm 	| Running Time 	|
 |:---------------------------:	|:----------------:	|
-| Plain python (numpy) 	| 8.27 s ± 216 ms per loop  	|
-| Numba 	| 8.04 s ± 259 ms per loop 	|
+| plain python (numpy) 	| 8.27 s ± 216 ms per loop  	|
+| mumba 	| 8.04 s ± 259 ms per loop 	|
+| cpp | 316 ms ± 6.25 ms per loop|
 
 # Applications to simulated data sets
 
@@ -95,5 +96,4 @@ And a comparison figure shown as below:
 
 
 # References
-
-
+Chen, Tianqi, Fox, Emily, and Guestrin, Carlos. Stochastic gradient hamiltonian monte carlo. ICML 2014. 
