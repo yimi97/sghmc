@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 # Abstract
-The Stochastic Gradient Hamiltonian Monte Carlo (SGHMC) algorithm is proposed to address the limitations of Hamiltonian Monte Carlo (HMC) sampling methods, which is not suitable for solving the problems of computing the gradient of streaming data or large sample size. SGHMC takes the advantage of noisy gradient estimates based on the subsets of data. This project implements the algorithm from the paper Stochastic Gradient Hamiltonian Monte Carlo and optimizes the performance by using Numba and C++. The algorithm was applied on both simulated data and real data and was compared to other competing algorithms.
+Hamiltonian Monte Carlo (HMC) sampling method is a Markov chain Monte Carlo method that uses the derivatives of the density function being sampled to generate efficient transitions spanning the posterior. The gradient computation for simulation of the Hamiltonian dynamical system is not suitable for streaming data or large sample size. The Stochastic Gradient Hamiltonian Monte Carlo (SGHMC) algorithm is thus proposed to address the limitations of HMC sampling methods. SGHMC takes the advantage of noisy gradient estimates based on the subsets of data. This project made a clear explanation and implemented the SGHMC algorithm from the paper Stochastic Gradient Hamiltonian Monte Carlo. Numba and C++ were utilized to optimize the performance of the code. The algorithm was applied on simulated dataset and tested on a handwritten digits classification task using the MNIST dataset, compared to SGLD and SGD with momentum methods. The package was created and published on TestPyPI.
 
 # Background
 
