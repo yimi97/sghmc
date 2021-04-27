@@ -6,7 +6,7 @@ Yi Mi (yi.mi@duke.edu)
 ## Introduction
 Implementation of Stochastic Gradient Hamiltonian Monte Carlo.
 
-## Sturcture
+## Structure
 `sghmc-2021`: Source code of SGHMC algorithms
 
 `test`: Test code
