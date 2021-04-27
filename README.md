@@ -8,10 +8,15 @@ Implementation of Stochastic Gradient Hamiltonian Monte Carlo.
 
 ## Sturcture
 `sghmc-2021`: Source code of SGHMC algorithms
+
 `test`: Test code
+
 `report`: A reproducible report
+
 `figures`: Reproducible figures
+
 `optimization`: Optimization code with Numba and C++
+
 `application`: Applications on simulated and real data
 
 ## Requirements
