@@ -33,6 +33,10 @@ Therefore, we have
 
 $$d\theta = M^{-1}r dt \ \ \ and \ \ \ dr = - \nabla U(\theta) dt$$
 
+The algorithm of Hamiltonian Monte Carlo can be shown as: 
+
+![algorithm of Hamiltonian Monte Carlo]("../pseudocode/algo1.png"){ width=50% }
+
 ###  Stochastic Gradient Hamiltonian Monte Carlo
 
 Instead of computing the $\nabla U$ in $dr = - \nabla U(\theta) dt$, SGHMC uniformly chooses $\tilde D$ (minibatch) from the dataset and compute $\tilde U$. The equattion can be shown as the following:
@@ -52,8 +56,12 @@ where $B(\theta)=\frac{1}{2}\epsilon V(\theta)$ (positive semi-definite). In add
 
 $$d \theta = M^{-1}rdt \ \ \ \ and \ \ \ \ dr = -\nabla U(\theta) dt - BM^{-1}rdt+N(0,2B(\theta)dt)$$
 
-$$dr = -\nabla U(\theta) dt - BM^{-1}rdt+N(0,2B(\theta)dt) \ \ \ \ (10)$$
+$$dr = -\nabla U(\theta) dt - BM^{-1}rdt+N(0,2B(\theta)dt)$$
 
+The algorithm of Stochastic Gradient Hamiltonian Monte Carlo can be shown as: 
+
+
+![algorithm of Stochastic Gradient Hamiltonian Monte Carlo]("../pseudocode/algo2.png"){ width=50% }
 
 # Optimization for performance
 
@@ -98,15 +106,21 @@ This part compares the distribution among five different algorithms (listed belo
   - The Naive stochastic gradient HMC without MH
 
 
-And a comparison figure shown as below:
+And a comparison table shown as below:
 
 
 
-![]("../figures/figure1.png")
+![Distributions of different algorithms]("../figures/figure1.png"){ width=60% }
 
 
 
-All five algorithms perform similarly to the distribution of simulated data except the naive stochastic gradient HMC without MH. Theoretically, SGHMC and HMC have the invariance of Hamiltonian function for a $\epsilon$ value close to 0. However, the naive stochastic gradient HMC without MH does not unless the MH step is added. That is the reason why the naive stochastic gradient HMC without MH is barely satisfactory in the figure. Then, the MH step will be costly, so that users may need a tradeoff between the accuracy and the cost. Our focus, the distribution of SGHMC, gives a similar result as the distribution of simulated data.
+All five algorithms perform similarly to the distribution of simulated data except the naive sThtochastic gradient HMC without MH. Theoretically, SGHMC and HMC have the invariance of Hamiltonian function for a $\epsilon$ value close to 0. However, the naive stochastic gradient HMC without MH does not unless the MH step is added. That is the reason why the naive stochastic gradient HMC without MH is barely satisfactory in the figure. Then, the MH step will be costly, so that users may need a tradeoff between the accuracy and the cost. Our focus, the distribution of SGHMC, gives a similar result as the distribution of simulated data.
+
+We also try to construct the sample draw from bivariate Gaussian with SGHMC correlation. Speciffically, we use $U(\theta)= 0.5 \times \theta^T\Sigma^{-1}\theta$ and $\nabla \tilde U(\theta) = \Sigma^{-1}\theta + N(0,I)$ where $\Sigma = \left(\begin{array}{cc} 1 & 0.9\\0.9 & -1\end{array}\right)$
+
+![Figure of Bivariate Gaussian with SGHMC correlation]("../figures/figure3.png"){ width=65% }
+
+The above figure 4 shows the bivariate Gaussian with SGHMC correlation. The SGHMC's momentum variable moves in the same direction as the contours of the distribution. This property is from HMC when handling the distributions that are correlated.
 
 
 # Applications to real data sets
