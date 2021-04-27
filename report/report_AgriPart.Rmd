@@ -112,29 +112,48 @@ All five algorithms perform similarly to the distribution of simulated data exce
 # Applications to real data sets
 
 ## Real data sets
-In addition to the application on the simulated datasets, we also applied the SGHMC on the real datasets MNIST, which was used in the paper. MNIST is a large database of handwritten digits that is commonly used for training various image processing systems, consists of 60,000 training instances and 10,000 test instances. We utilized the author’s code to train a two-layer Bayesian neural network with 100 hidden variables using a sigmoid unit and an output layer using softmax. To select training parameters, the training data is split out 10,000 instances to form a validation set and the remaining 50,000 instances are used for training. We run the samplers for 800 iterations and discard the initial 50 samples as burn-in. Three methods are tested in this experiment, SGD with momentum, SGLD and SGHMC. Fig 3 is the test result of the methods. It is shown that, based on our experiment results, both SGHMC and SGD with momentum converge to the lower test error compared to SGLD. But in Fig 4 we can see that SGHMC has the better result than SGD with momentum. However, according to the running time, SGHMC is much faster than SGD with momentum.
+In addition to the application on the simulated datasets, we also applied the SGHMC on the real datasets MNIST, which was used in the paper. MNIST is a large database of handwritten digits that is commonly used for training various image processing systems, consists of 60,000 training instances and 10,000 test instances. We utilized the author’s code to train a two-layer Bayesian neural network with 100 hidden variables using a sigmoid unit and an output layer using softmax. To select training parameters, the training data is split out 10,000 instances to form a validation set and the remaining 50,000 instances are used for training. We run the samplers for 800 iterations and discard the initial 50 samples as burn-in. Three methods are tested in this experiment, SGD with momentum, SGLD and SGHMC. Fig 3 is the test result of the methods. It is shown that, based on our experiment results, both SGHMC and SGD with momentum converge to the lower test error compared to SGLD. 
 
 ![]("../figures/Real_data_1.png")
 
-![]("../figures/Real_data_2.png")
 
 ## Comparing algorithms
 
-SGD with momentum is a method adding a momentum term to SGD. Momentum is essentially a small change to the SGD parameter update so that movement through the parameter space is averaged over multiple time steps. 
+In this section we are going to compare SGHMC with SGD with momentum. SGD with momentum is a method adding a momentum term to SGD. Momentum is essentially a small change to the SGD parameter update so that movement through the parameter space is averaged over multiple time steps. 
 Formally the update rule in SGD is defined like this:
-
-$$\theta_{t+1} = \theta_{t} - \eta\nabla l(\theta) \ \ \ \ (11)$$
+$$\theta_{t+1} = \theta_{t} - \eta\nabla l(\theta)$$
 With momentum, the SGD update rule is changed to:
-$$v_{t+1} = \mu v_{t} - \eta\nabla l(\theta) \ \ \ \ (12)$$
-$$\theta_{t+1} = \theta_{t} + v_{t+1} \ \ \ \ (13)$$
+$$v_{t+1} = \mu v_{t} - \eta\nabla l(\theta)$$
+$$\theta_{t+1} = \theta_{t} + v_{t+1}$$
 
 Here $v$ is the velocity and $\mu$ is the momentum parameter which controls how fast the velocity can change and how much the local gradient influences long term movement. At every time step the velocity is updated according to the local gradient and is then applied to the parameters.
 
 Nesterov Momentum (NAG) is used in the paper. NAG is a simple change to normal momentum. The update rule is changed to:
+$$v_{t+1} = \mu v_{t} - \eta\nabla l(\theta + \mu v_t)$$
+$$\theta_{t+1} = \theta_{t} + v_{t+1}$$
 
-$$v_{t+1} = \mu v_{t} - \eta\nabla l(\theta + \mu v_t) \ \ \ \ (14)$$
-$$\theta_{t+1} = \theta_{t} + v_{t+1} \ \ \ \ (15)$$
-As discussed in the paper, there is a relationship between SGD with momentum and SGHMC.
+As discussed in the paper, there is a relationship between SGD with momentum and SGHMC. letting $v=\epsilon M^{-1}r$, we first rewrite the update rule as:
+$$ \left\{
+\begin{aligned}
+\Delta \theta & =  v\\
+\Delta v & =  -\epsilon^2 M^{-1} \nabla \tilde{U}(\theta)-\epsilon M^{-1}Cv+N(0,2\epsilon^3M^{-1}(C-\hat{B})M^{-1}) \\
+\end{aligned}
+\right.
+$$
+
+Define $\eta=\epsilon^2M^{-1}, \alpha=\epsilon M^{-1}C,\hat{\beta}=\epsilon M^{-1}\hat{B}$. The updated rule becomes:
+$$ \left\{
+\begin{aligned}
+\Delta \theta & =  v\\
+\Delta v & =-\eta \nabla \tilde{U}(x) - \alpha x + N(0,2(\alpha-\hat{\beta})\eta) \\
+\end{aligned}
+\right.
+$$
+Comparing SGHMC to an SGD with momentum method, we can see that $\eta$ corresponds to the learning rate and $1-\alpha$ the momentum term. When the noise is removed (via $C = \hat{B}$ = 0), SGHMC naturally reduces to a stochastic gradient method with momentum.
+
+In Fig 4 we can see that SGHMC has the better result than SGD with momentum. Additionally, according to the running time of our experiments, SGHMC is much faster than SGD with momentum. 
+
+![]("../figures/Real_data_2.png")
 
 # Discussion
 
@@ -152,4 +171,8 @@ Chen, Tianqi, Fox, Emily, and Guestrin, Carlos. Stochastic gradient hamiltonian 
 
 ### Installation
 `pip install -i https://test.pypi.org/simple/ sghmc-2021`
+
+### Contributions
+- Qinzhe Wang: implemented SGHMC algorithm, optimized code, applied algorithms on simulated data sets, wrote report
+- Yi Mi: optimized code, applied algorithms on real data sets, wrote report, created Python package
 
