@@ -89,8 +89,6 @@ We first found that using Numba did not improve the performance a lot, so we dec
 
 Except using cpp, the other three methods provide similar results regarding the mixture normal example. We can see that using Cholesky decomposition or using JIT compilation (numba) only improves the algorithm a little, from 7.91 s ± 140 ms per loop to 7.51 s ± 140 ms per loop and 7.38 s ± 321 ms per loop. One noteworthy point is that we use the `jacobian` function from the autograd package o calculate the auto-gradient. However, this function takes more time than expected. To implement SGHMC, a function to calculate the gradients of log densities are necessary. Therefore, we encourage users to write a gradient function by themselves and then use it as an argument in the sghmc function (our sghmc function allows users to use their gradient functions).
 
-\newpage
-
 # Application to simulated data sets
 
 This part compares the distribution among five different algorithms (listed below) and the true distribution of the simulated data set in the original paper $U(\theta) = -2\theta^2+\theta^4$.
@@ -113,6 +111,8 @@ This part compares the distribution among five different algorithms (listed belo
 And a comparison table shown as below:
 
 ![Distributions of different algorithms]("../figures/figure1.png"){ width=60% }
+
+\newpage
 
 All five algorithms perform similarly to the distribution of simulated data except the naive sThtochastic gradient HMC without MH. Theoretically, SGHMC and HMC have the invariance of Hamiltonian function for a $\epsilon$ value close to 0. However, the naive stochastic gradient HMC without MH does not unless the MH step is added. That is the reason why the naive stochastic gradient HMC without MH is barely satisfactory in the figure. Then, the MH step will be costly, so that users may need a tradeoff between the accuracy and the cost. Our focus, the distribution of SGHMC, gives a similar result as the distribution of simulated data.
 
