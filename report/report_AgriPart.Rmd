@@ -123,6 +123,9 @@ In addition to the application on the simulated datasets, we also applied the SG
 
 # Discussion
 
+SGHMC improves the efficiency of HMC by adding stochastic estimates of the gradient, simplifying the computation of the gradient. In addition, to offset the noise term, the friction term is added to the dynamic system. The implementation of SGHMC of both simulated data and real data shows that SGHMC is efficient. However, the algorithm needs hyperparameters, including learning rate and the noise term. Different inputted values will lead us to different distributions. In other words, the accuracy is correlated to those hyperparameters. As mentioned in the paper `Stochastic gradient Hamiltonian Monte Carlo written by Chen, Fox, and Guestrin, it does increase the efficiency of the algorithm in the real world with a large dataset.
+
+
 
 # References
 Chen, Tianqi, Fox, Emily, and Guestrin, Carlos. Stochastic gradient hamiltonian monte carlo. ICML 2014. 
