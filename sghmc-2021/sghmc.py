@@ -74,8 +74,13 @@ def sghmc(gradU, eps, C, Mmatrix, theta_initial, Cov_hat, epoch_nums, epoch_nums
         for batch in range(batch_nums):
             theta += (eps * Mmatrix @ r).ravel()
             gradU_batch = gradU(theta, data_batched[:, :, batch], n, size).reshape(p, -1)
-            r = r - eps * gradU_batch - eps * C @ Mmatrix @ r + noise_sqrt @ np.random.normal(size=p).reshape(p, -1)
+            r = r - eps * gradU_batch - eps * C @ Mmatrix @ r + np.random.multivariate_normal(np.zeros(p), noise_sqrt).reshape(p, -1)
+           
         theta_samp[:, i + 1] = theta
 
     return theta_samp[:, epoch_nums_drop:]
+
+       
+
+
 
