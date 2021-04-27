@@ -118,8 +118,23 @@ In addition to the application on the simulated datasets, we also applied the SG
 
 ![]("../figures/Real_data_2.png")
 
-## Competing algorithms
+## Comparing algorithms
 
+SGD with momentum is a method adding a momentum term to SGD. Momentum is essentially a small change to the SGD parameter update so that movement through the parameter space is averaged over multiple time steps. 
+Formally the update rule in SGD is defined like this:
+
+$$\theta_{t+1} = \theta_{t} - \eta\nabla l(\theta) \ \ \ \ (11)$$
+With momentum, the SGD update rule is changed to:
+$$v_{t+1} = \mu v_{t} - \eta\nabla l(\theta) \ \ \ \ (12)$$
+$$\theta_{t+1} = \theta_{t} + v_{t+1} \ \ \ \ (13)$$
+
+Here $v$ is the velocity and $\mu$ is the momentum parameter which controls how fast the velocity can change and how much the local gradient influences long term movement. At every time step the velocity is updated according to the local gradient and is then applied to the parameters.
+
+Nesterov Momentum (NAG) is used in the paper. NAG is a simple change to normal momentum. The update rule is changed to:
+
+$$v_{t+1} = \mu v_{t} - \eta\nabla l(\theta + \mu v_t) \ \ \ \ (14)$$
+$$\theta_{t+1} = \theta_{t} + v_{t+1} \ \ \ \ (15)$$
+As discussed in the paper, there is a relationship between SGD with momentum and SGHMC.
 
 # Discussion
 
