@@ -1,4 +1,4 @@
-import sghmc as sg
+import sghmc
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -19,8 +19,9 @@ def gradU_noise(theta, x, n, size):
     '''noisy gradient from paper fig1'''
     return -4 * theta + 4 * theta**3 + np.random.normal(0, 2)
 
-sim = sg.sghmc(gradU_noise, eps, C, np.eye(p), theta_0, V, epochs, burns, x, size)
+sim = sghmc.sghmc(gradU_noise, eps, C, np.eye(p), theta_0, V, epochs, burns, x, size)
 
-plt = sns.kdeplot(sim[0, :])
-fig = plt.get_figure()
-fig.show()
+# plt = sns.kdeplot(sim[0, :])
+# fig = plt.get_figure()
+# fig.show()
+print("TEST")

@@ -1,10 +1,51 @@
-Metadata-Version: 1.0
+Metadata-Version: 2.1
 Name: sghmc-2021
-Version: 0.1
+Version: 0.3
 Summary: Implementation of Stochastic Gradient Hamiltonian Monte Carlo
 Home-page: https://github.com/yimi97/sghmc
 Author: Qinzhe Wang & Yi Mi
 Author-email: sif1900@outlook.com
 License: MIT
-Description: UNKNOWN
+Description: # SGHMC Algorithm Implementation
+        Qinzhe Wang (qw92@duke.edu)
+        
+        Yi Mi (yi.mi@duke.edu)
+        
+        ## Introduction
+        Implementation of Stochastic Gradient Hamiltonian Monte Carlo.
+        
+        ## Structure
+        `sghmc-2021`: Source code of SGHMC algorithms
+        
+        `test`: Test code
+        
+        `report`: A reproducible report
+        
+        `figures`: Reproducible figures
+        
+        `optimization`: Optimization code with Numba and C++
+        
+        `application`: Applications on simulated and real data
+        
+        ## Requirements
+        Install required packages.
+        ```
+        pip install -r requirements.txt
+        ```
+        
+        ## Installation
+        This package is published on TestPyPI.
+        ```
+        pip install -i https://test.pypi.org/simple/ sghmc-2021
+        ```
+        
+        ## Experiments
+        
+        ### Optimzation
+        
+        ### Applications
+        
+        ## Maintainers
+        
 Platform: UNKNOWN
+Description-Content-Type: text/markdown
