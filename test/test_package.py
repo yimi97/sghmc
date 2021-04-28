@@ -1,7 +1,5 @@
 import sghmc
 import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 np.random.seed(663)
 n = 100
@@ -21,7 +19,4 @@ def gradU_noise(theta, x, n, size):
 
 sim = sghmc.sghmc(gradU_noise, eps, C, np.eye(p), theta_0, V, epochs, burns, x, size)
 
-# plt = sns.kdeplot(sim[0, :])
-# fig = plt.get_figure()
-# fig.show()
 print("TEST")
