@@ -1,9 +1,0 @@
-README.md
-setup.py
-sghmc/__init__.py
-sghmc/sghmc.py
-sghmc_2021.egg-info/PKG-INFO
-sghmc_2021.egg-info/SOURCES.txt
-sghmc_2021.egg-info/dependency_links.txt
-sghmc_2021.egg-info/not-zip-safe
-sghmc_2021.egg-info/top_level.txt
