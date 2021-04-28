@@ -37,26 +37,28 @@ def sghmc(gradU, eps, C, Mmatrix, theta_initial, Cov_hat, epoch_nums, epoch_nums
 
     """
     apply the SGHMC function in the paper
+    
+    inputs:
+    
+    gradU: function(theta, X, y), U gradient
+
+    eps: learning rate
+
+    C: friction matrix P X P
+
+    Mmatrix: Mass matrix P X P
+
+    theta_initial: initial value of theta
+
+    Cov_hat: estimated covariance matrix of stochastic gradient noise
+
+    epoch_nums: number of epochs to perform
+
+    epoch_nums_drop: number of epochs to drop
+
+    size: minbatch size per iteration
     """
-    ## gradU: function(theta, X, y), U gradient
 
-    ## eps: learning rate
-
-    ## C: friction matrix P X P
-
-    ## Mmatrix: Mass matrix P X P
-
-    ## theta_initial: initial value of theta
-
-    ## Cov_hat: estimated covariance matrix of stochastic gradient noise
-
-    ## epoch_nums: number of epochs to perform
-
-    ## epoch_nums_drop: number of epochs to drop
-
-    ## size: minbatch size per iteration
-
-    ## seed: seed
     np.random.seed(seed)
     n = data.shape[0]
     p = theta_initial.shape[0]
